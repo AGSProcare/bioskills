@@ -5,7 +5,7 @@ Small, composable skills for your favorite agent.
 ### Quick install recommended skills
 
 ```sh
-npx @agent-native/skills@latest add
+npx @agent-native/skills@0.3.20 add
 ```
 
 See the [full CLI docs below](#install).
@@ -215,7 +215,7 @@ in context, including responsive states and multi-screen flows.
 Install the skill and Design connector from your app repository:
 
 ```sh
-npx @agent-native/core@latest skills add visual-edit
+npx @agent-native/core@0.198.8 skills add visual-edit
 ```
 
 Try it on one screen, several routes, a complete flow, or responsive sizes:
@@ -277,7 +277,7 @@ Visual recaps are MDX, customizable with your own components, and are viewed wit
 You can also install a GitHub action for these to be automatically generated for every PR with
 
 ```sh
-npx @agent-native/skills@latest add
+npx @agent-native/skills@0.3.20 add
 ```
 
 ![Example of a visual plan posted to a PR](https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2Fcf9bac396cf24a4ba976fc331af6fc5d)
@@ -390,7 +390,7 @@ use ignored `.env` setting `AUTH_DISABLED=1` so they open without an account.
 Run the installer:
 
 ```sh
-npx @agent-native/skills@latest add
+npx @agent-native/skills@0.3.20 add
 ```
 
 The picker shows the full catalog, with the recommended skills preselected.
@@ -417,16 +417,16 @@ The installer walks you through the choices:
 Skip the picker with `--skill`:
 
 ```sh
-npx @agent-native/skills@latest add --skill quick-recap
-npx @agent-native/skills@latest add --skill visual-recap --with-github-action
-npx @agent-native/skills@latest add --skill rewind
-npx @agent-native/skills@latest add --skill webmcp
+npx @agent-native/skills@0.3.20 add --skill quick-recap
+npx @agent-native/skills@0.3.20 add --skill visual-recap --with-github-action
+npx @agent-native/skills@0.3.20 add --skill rewind
+npx @agent-native/skills@0.3.20 add --skill webmcp
 ```
 
 You can also use Vercel's `skills` CLI for a plain skill-folder copy:
 
 ```sh
-npx skills@latest add BuilderIO/skills --skill quick-recap
+npx skills@1.7.0 add BuilderIO/skills --skill quick-recap
 ```
 
 Do not use the plain-copy installer for Rewind: it cannot configure the local
@@ -481,7 +481,7 @@ open the official Clips Desktop installer, but it must not install or enable
 capture silently. After Clips is installed and Rewind is enabled, also run:
 
 ```sh
-npx @agent-native/core@latest skills add rewind --client claude-code --scope user --yes
+npx @agent-native/core@0.198.8 skills add rewind --client claude-code --scope user --yes
 ```
 
 Treat Rewind as unavailable until `screen_memory_status` succeeds.

@@ -3,6 +3,11 @@ import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { PINNABLE_EXTENSIONS, applyPins } from "./version-pins.mjs";
+
+function pinIfText(rel, body) {
+  return PINNABLE_EXTENSIONS.has(path.extname(rel)) ? applyPins(body) : body;
+}
 
 const scriptPath = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(scriptPath), "..");
@@ -149,6 +154,13 @@ async function copySkill(name, sourceDir) {
   await mkdir(path.dirname(destination), { recursive: true });
   await cp(sourceDir, destination, { recursive: true });
 
+  for (const rel of await listFiles(destination)) {
+    const abs = path.join(destination, rel);
+    const body = await readFile(abs, "utf8");
+    const pinned = pinIfText(rel, body);
+    if (pinned !== body) await writeFile(abs, pinned);
+  }
+
   for (const [rel, body] of preservedDocs) {
     await mkdir(path.dirname(path.join(destination, rel)), { recursive: true });
     await rm(path.join(destination, rel), { force: true });
@@ -173,7 +185,7 @@ async function copyGeneratedSkill(name, source) {
 
   await rm(destination, { recursive: true, force: true });
   await mkdir(destination, { recursive: true });
-  await writeFile(path.join(destination, "SKILL.md"), source.content);
+  await writeFile(path.join(destination, "SKILL.md"), applyPins(source.content));
 
   for (const [rel, body] of preservedDocs) {
     await writeFile(path.join(destination, rel), body);
@@ -219,7 +231,7 @@ async function assertSkillCurrent(name, sourceDir) {
       readFile(path.join(sourceDir, rel), "utf8"),
       readFile(path.join(destination, rel), "utf8"),
     ]);
-    if (sourceBody !== destinationBody) {
+    if (pinIfText(rel, sourceBody) !== destinationBody) {
       throw new Error(`${name}/${rel} is out of sync`);
     }
   }
@@ -231,7 +243,7 @@ async function assertGeneratedSkillCurrent(name, source) {
   if (!existsSync(destination)) {
     throw new Error(`${name} is missing at ${destination}`);
   }
-  if ((await readFile(destination, "utf8")) !== source.content) {
+  if ((await readFile(destination, "utf8")) !== applyPins(source.content)) {
     throw new Error(`${name}/SKILL.md is out of sync`);
   }
   console.log(`${name} is current`);

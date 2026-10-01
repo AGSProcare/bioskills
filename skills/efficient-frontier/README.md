@@ -46,7 +46,7 @@ and spot-check verification before presenting the final answer.
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add --skill efficient-frontier --update-instructions
+npx @agent-native/skills@0.3.20 add --skill efficient-frontier --update-instructions
 ```
 
 Use `--update-instructions` when you want the orchestration convention added to

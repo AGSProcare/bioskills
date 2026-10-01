@@ -33,7 +33,7 @@ than value.
 When Claude Code does not expose a better first-party usage signal, use:
 
 ```sh
-npx -y ccusage@latest blocks --active --json
+npx -y ccusage@20.0.26 blocks --active --json
 ```
 
 The agent should read the active block start, current usage or cost, and time
@@ -54,7 +54,7 @@ usage window matters more than keeping the prompt cache warm.
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add --skill stay-within-limits --update-instructions
+npx @agent-native/skills@0.3.20 add --skill stay-within-limits --update-instructions
 ```
 
 Use `--update-instructions` when you want the 5-hour and weekly limit convention

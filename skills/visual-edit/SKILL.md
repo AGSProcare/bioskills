@@ -42,8 +42,8 @@ for a worked onboarding-flow example.
 
 ## Installation
 
-`npx @agent-native/core@latest skills add visual-edit` installs the skill and
-hosted Design MCP connector. `npx skills@latest add BuilderIO/agent-native
+`npx @agent-native/core@0.198.8 skills add visual-edit` installs the skill and
+hosted Design MCP connector. `npx skills@1.7.0 add BuilderIO/agent-native
 --skill visual-edit` installs instructions only; page-capable WebMCP hosts need
 no connector installation.
 
@@ -277,7 +277,7 @@ page never returns it:
 
 ```bash
 BRIDGE_TOKEN="$(node -e 'process.stdout.write(require("node:crypto").randomBytes(32).toString("hex"))')"
-AGENT_NATIVE_BRIDGE_TOKEN="$BRIDGE_TOKEN" npx @agent-native/core@latest design connect --url http://localhost:5173 --root . --daemon
+AGENT_NATIVE_BRIDGE_TOKEN="$BRIDGE_TOKEN" npx @agent-native/core@0.198.8 design connect --url http://localhost:5173 --root . --daemon
 ```
 
 Reuse an existing matching connection without `bridgeToken`; hosted MCP can
@@ -288,7 +288,7 @@ From the target app repo, make sure its dev server is running, then:
 **1. Discover routes without starting a durable bridge** (one-shot, exits):
 
 ```bash
-npx @agent-native/core@latest design connect --url http://localhost:5173 --root . --json
+npx @agent-native/core@0.198.8 design connect --url http://localhost:5173 --root . --json
 ```
 
 This prints the manifest (routes + capabilities). Parse it to build
@@ -312,7 +312,7 @@ placed screens' metadata, and returns it to you as `bridgeToken`. Capture it.
 env var so the secret does not appear in `ps`):
 
 ```bash
-AGENT_NATIVE_BRIDGE_TOKEN="<bridgeToken from step 2>" npx @agent-native/core@latest design connect --url http://localhost:5173 --root . --daemon
+AGENT_NATIVE_BRIDGE_TOKEN="<bridgeToken from step 2>" npx @agent-native/core@0.198.8 design connect --url http://localhost:5173 --root . --daemon
 ```
 
 (Equivalently, pass `--bridge-token <token>`.) This starts a detached bridge on
@@ -496,7 +496,7 @@ revision. Verify the applied source, acknowledge that revision, then pull again.
 If MCP is unavailable, read the local bridge:
 
 ```bash
-npx @agent-native/core@latest design pending --root . --design-id <design-id-from-visual-edit-url>
+npx @agent-native/core@0.198.8 design pending --root . --design-id <design-id-from-visual-edit-url>
 ```
 
 Pass the ID after `visual-edit` in the Design URL; the CLI prints that

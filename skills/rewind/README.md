@@ -50,13 +50,13 @@ To repair or configure a connection directly, run this in a terminal with the
 matching client name:
 
 ```sh
-npx -y @agent-native/core@latest skills add rewind --client codex --scope user --yes
+npx -y @agent-native/core@0.198.8 skills add rewind --client codex --scope user --yes
 ```
 
 The public skills installer also supports Rewind:
 
 ```sh
-npx @agent-native/skills@latest add --skill rewind
+npx @agent-native/skills@0.3.20 add --skill rewind
 ```
 
 Both advertised paths must install the local `clips-screen-memory` connection;

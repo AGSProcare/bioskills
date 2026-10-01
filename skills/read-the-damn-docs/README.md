@@ -50,5 +50,5 @@ These should trigger docs before code:
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add --skill read-the-damn-docs
+npx @agent-native/skills@0.3.20 add --skill read-the-damn-docs
 ```

@@ -14,7 +14,7 @@ action policies with `/factory` in `.agent-factory/config.yaml`. See the
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add
+npx @agent-native/skills@0.3.20 add
 ```
 
 Select **Factory** to preselect its modules, remove any modules you do not

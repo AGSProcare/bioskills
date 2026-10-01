@@ -131,9 +131,3 @@ jobs:
             pr_number="$(gh pr list --head "$UPDATE_BRANCH" --state open --json number --jq '.[0].number')"
           fi
           echo "number=$pr_number" >> "$GITHUB_OUTPUT"
-
-      - name: Auto-merge update PR
-        if: steps.diff.outputs.changed == 'true'
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
-        run: gh pr merge "${{ steps.pr.outputs.number }}" --squash --delete-branch

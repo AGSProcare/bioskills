@@ -18,7 +18,7 @@ Use this for public skill work in this repo. Keep ordinary skill changes in
 - **Plain public skill:** a normal folder under `skills/<name>/` with
   `SKILL.md`. This is the common case. `@agent-native/skills` discovers these
   dynamically from `BuilderIO/skills@main`, so there is no framework registry to
-  edit just to make `npx @agent-native/skills@latest add --skill <name>` work.
+  edit just to make `npx @agent-native/skills@0.3.20 add --skill <name>` work.
 - **Instruction-style skill:** a plain skill that should optionally write an
   always-on managed `AGENTS.md` / `CLAUDE.md` line when users pass
   `--update-instructions`. These need one extra framework change; see
@@ -72,7 +72,7 @@ For a plain public skill, the install path is dynamic:
 - Therefore a new folder under `skills/<name>/` is enough for:
 
   ```sh
-  npx @agent-native/skills@latest add --skill <name>
+  npx @agent-native/skills@0.3.20 add --skill <name>
   ```
 
 No `@agent-native/core` built-in registry change is needed unless the skill is

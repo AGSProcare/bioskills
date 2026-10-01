@@ -13,6 +13,8 @@
     "sync:agent-native-skills": "node scripts/sync-agent-native-skills.mjs",
     "sync:agent-native-visual-skills": "npm run sync:agent-native-skills",
     "sync:agent-native-plan-skills": "npm run sync:agent-native-skills",
-    "check": "npm run check:skills && npm run check:agent-native-skills"
+    "check:hardening": "node scripts/check-fork-hardening.mjs",
+    "fix:pins": "node scripts/check-fork-hardening.mjs --fix",
+    "check": "npm run check:skills && npm run check:hardening && npm run check:agent-native-skills"
   }
 }

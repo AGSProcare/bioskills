@@ -108,6 +108,32 @@ What `npm run check` does:
 
 If the check fails, review the error messages and fix the issues before committing.
 
+## Fork security hardening
+
+This fork (`AGSProcare/bioskills`) diverges from `BuilderIO/skills` in a few deliberate ways:
+
+- **Pinned versions.** Docs and skills never tell users or agents to run `<package>@latest`. Exact versions live in `scripts/version-pins.mjs`; `npm run fix:pins` rewrites every `@latest` reference, and the Agent Native sync applies the same pins automatically.
+- **Pinned CI tooling.** `pr-visual-recap.yml` installs exact versions of `@agent-native/core`, Claude Code, Codex, and Playwright.
+- **Trusted authors only.** The visual recap agent reads the PR diff with API keys in its environment, so it only runs for PRs from owners, members, or collaborators.
+- **No auto-merge.** The Agent Native skill updater opens a PR for human review instead of merging it.
+
+`npm run check:hardening` (also run in CI) fails if any of these regress.
+
+### Pulling updates from upstream
+
+```bash
+git remote add upstream https://github.com/BuilderIO/skills.git  # once
+git fetch upstream
+git checkout -b sync-upstream origin/main
+git merge upstream/main
+npm run fix:pins
+npm run check:hardening
+```
+
+Git keeps the fork's edits unless upstream changed the same lines; those show up as merge conflicts. When resolving them, keep the pinned versions, the trusted-author gate, and the removed auto-merge step. New upstream `@latest` references merge in silently, so always run `npm run fix:pins` afterwards. Open the result as a PR, and avoid GitHub's **Sync fork** button: it merges straight into `main` without running these checks.
+
+To bump a pin, update `scripts/version-pins.mjs` (or the version in `pr-visual-recap.yml`), run `npm run fix:pins`, and review the changelog of the new version first.
+
 ## Code style & commit messages
 
    1. Use clear, descriptive commit messages explaining the "why" behind your changes.

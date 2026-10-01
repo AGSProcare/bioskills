@@ -240,7 +240,7 @@ assume it used the legacy kit path and replace it with an HTML screen.
 
 In local-files privacy mode, run `plan local check` first, then report the local
 bridge URL from
-`npx @agent-native/core@latest plan local serve --dir <plan-dir> --kind recap --open`
+`npx @agent-native/core@0.198.8 plan local serve --dir <plan-dir> --kind recap --open`
 or from `<plan-dir>/.plan-url`. It opens the hosted Plan UI but reads from the
 localhost bridge on this machine, so it is not shareable across machines. If the
 Plan app itself is running locally with the same `PLAN_LOCAL_DIR`, the
@@ -406,7 +406,7 @@ hosted or self-hosted mode, call `get-plan-blocks` on the Plan MCP connector
 lazy-loading client, search/load them through the host's tool discovery surface
 first (`tool_search` when available). In local-files mode, or when the skill was
 installed as plain text and no MCP tools are registered after discovery, run
-`npx @agent-native/core@latest plan blocks --out plan-blocks.md` and read that
+`npx @agent-native/core@0.198.8 plan blocks --out plan-blocks.md` and read that
 file first. The CLI command calls the public no-auth `get-plan-blocks` route and
 sends no plan/recap content. If network access is unavailable, use the bundled
 references and validate with `plan local check`; run `plan local serve` only

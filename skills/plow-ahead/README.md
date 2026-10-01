@@ -38,5 +38,5 @@ decisions, assumptions, files changed, validation run, and remaining risk.
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add --skill plow-ahead
+npx @agent-native/skills@0.3.20 add --skill plow-ahead
 ```

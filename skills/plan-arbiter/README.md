@@ -37,5 +37,5 @@ pieces, rejected ideas, verification, and executor recommendation.
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add --skill plan-arbiter
+npx @agent-native/skills@0.3.20 add --skill plan-arbiter
 ```

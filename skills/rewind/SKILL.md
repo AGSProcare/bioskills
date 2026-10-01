@@ -37,7 +37,7 @@ anything:
 5. Ask the user to enable Rewind in the Clips tray and choose the intended
    capture mode. Then configure the local connection with:
 
-   `npx -y @agent-native/core@latest skills add rewind --client <client> --scope user --yes`
+   `npx -y @agent-native/core@0.198.8 skills add rewind --client <client> --scope user --yes`
 
    Replace `<client>` with the current compatible host: `codex`,
    `claude-code`, `cursor`, `opencode`, `github-copilot`, or `cowork`.
@@ -76,7 +76,7 @@ anything:
 - If Clips is installed and Rewind is enabled but the Screen Memory MCP is
   missing, explain that only the agent connection needs repair with:
 
-  `npx -y @agent-native/core@latest skills add rewind --client <client> --scope user --yes`
+  `npx -y @agent-native/core@0.198.8 skills add rewind --client <client> --scope user --yes`
 
   Ask the user to restart the host if it cannot reload MCP servers in place.
 - Never conflate installing Clips Desktop with installing the skill/MCP

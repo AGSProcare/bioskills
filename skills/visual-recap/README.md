@@ -81,7 +81,7 @@ before moving into raw GitHub diff view.
 The top-level installer also offers the PR action as an option:
 
 ```sh
-npx @agent-native/skills@latest add
+npx @agent-native/skills@0.3.20 add
 ```
 
 ![Example of a visual recap posted to a PR](https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2Fcf9bac396cf24a4ba976fc331af6fc5d)
@@ -89,14 +89,14 @@ npx @agent-native/skills@latest add
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add --skill visual-recap --with-github-action
+npx @agent-native/skills@0.3.20 add --skill visual-recap --with-github-action
 ```
 
 The interactive installer asks whether to use hosted Plans or local files. To
 force the no-sharing local path:
 
 ```sh
-npx @agent-native/skills@latest add --skill visual-recap --mode local-files
+npx @agent-native/skills@0.3.20 add --skill visual-recap --mode local-files
 ```
 
 The skill expects the [Plan MCP connector](https://www.agent-native.com/docs/template-plan)

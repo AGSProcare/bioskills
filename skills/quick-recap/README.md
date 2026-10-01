@@ -48,7 +48,7 @@ Red means the agent is blocked on user input:
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add --skill quick-recap --update-instructions
+npx @agent-native/skills@0.3.20 add --skill quick-recap --update-instructions
 ```
 
 Use `--update-instructions`; copying the skill alone does not make the footer

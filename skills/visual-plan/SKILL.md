@@ -497,7 +497,7 @@ sign-in at setup — this is intended), so the first tool call in that client do
 not hit an OAuth wall:
 
 ```bash
-npx @agent-native/core@latest skills add visual-plans
+npx @agent-native/core@0.198.8 skills add visual-plans
 ```
 
 After that, `/visual-plan`, `/visual-recap`, and `/visualize-repo` are the
@@ -508,7 +508,7 @@ installed slash commands. If you only need one command, use
 `create-visual-questions`) are MCP tools reachable from `/visual-plan`, not
 separate slash commands. Pass `--no-connect` to register the connector without
 authenticating, then run
-`npx @agent-native/core@latest connect https://plan.agent-native.com --client all`
+`npx @agent-native/core@0.198.8 connect https://plan.agent-native.com --client all`
 whenever you are ready, or choose a narrower `--client`. Auth and MCP tool
 loading are per client config/session.
 
@@ -524,7 +524,7 @@ your repo as MDX. This local mode is a separate advanced path, not the default
 hosted flow.
 
 For repo-wide visual docs, run
-`npx @agent-native/core@latest visualize-repo --open` to create/update
+`npx @agent-native/core@0.198.8 visualize-repo --open` to create/update
 `agent-native.json`, seed `.agent-native/visual-docs/repo-overview`, and open
 the local bridge.
 

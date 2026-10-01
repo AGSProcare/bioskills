@@ -52,7 +52,7 @@ Run the interactive installer and select **Factory** to preselect the group.
 You can remove individual skills, then choose clients and install scope:
 
 ```sh
-npx @agent-native/skills@latest add
+npx @agent-native/skills@0.3.20 add
 ```
 
 Every Factory skill is marked experimental in the installer and skills list.

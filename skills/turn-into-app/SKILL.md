@@ -289,7 +289,7 @@ For a new UI-bearing standalone app, use the current Agent-Native scaffold and
 then read the generated `AGENTS.md`:
 
 ```bash
-npx @agent-native/core@latest create <app-directory> --template chat
+npx @agent-native/core@0.198.8 create <app-directory> --template chat
 cd <app-directory>
 pnpm install
 ```
@@ -452,8 +452,8 @@ documented build and hosting path. For an app inside a workspace, use the
 workspace deploy command, for example:
 
 ```bash
-npx @agent-native/core@latest build
-npx @agent-native/core@latest deploy --preset netlify
+npx @agent-native/core@0.198.8 build
+npx @agent-native/core@0.198.8 deploy --preset netlify
 ```
 
 Use `vercel` or another supported preset when that is the configured target.
