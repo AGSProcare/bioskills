@@ -19,6 +19,8 @@ jobs:
           node-version: "22"
       - name: Check public skill frontmatter
         run: npm run check:skills
+      - name: Check fork security hardening
+        run: npm run check:hardening
       - name: Resolve Agent Native source ref
         id: agent-native-source
         env:

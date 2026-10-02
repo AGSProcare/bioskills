@@ -20,12 +20,12 @@ The local-files contract:
 
 - **Read context locally.** Read source, diff, and stat context from local files
   and shell commands only. For recaps, the
-  `npx @agent-native/core@latest recap collect-diff`, `scan`, and
+  `npx @agent-native/core@0.198.8 recap collect-diff`, `scan`, and
   `build-prompt --local-files` helpers are safe — they operate on local files and
   do not write to the Plan database.
 - **Fetch the block catalog first** (it sends no plan content). Use the MCP
   `get-plan-blocks` tool if it is already available, or run
-  `npx @agent-native/core@latest plan blocks --out plan-blocks.md` and read that
+  `npx @agent-native/core@0.198.8 plan blocks --out plan-blocks.md` and read that
   file before authoring MDX; it calls the public no-auth `get-plan-blocks` route.
   Use `--format schema` when you need exact nested fields. If network access is
   unavailable, use the bundled `references/*.md` and rely on `plan local check` to
@@ -47,9 +47,9 @@ The local-files contract:
   `localOnly: true` in the frontmatter/state. Use that exact folder as
   `<plan-dir>` in every command below.
 - **Check, then serve.** Run
-  `npx @agent-native/core@latest plan local check --dir <plan-dir>` before any
+  `npx @agent-native/core@0.198.8 plan local check --dir <plan-dir>` before any
   preview, then
-  `npx @agent-native/core@latest plan local serve --dir <plan-dir> --kind <plan|recap> --open`
+  `npx @agent-native/core@0.198.8 plan local serve --dir <plan-dir> --kind <plan|recap> --open`
   (use `--kind plan` for plans, `--kind recap` for recaps). Report the local
   bridge URL from stdout or `<plan-dir>/.plan-url`; treat `.plan-url` as a local
   token file and do not commit it. The URL opens the hosted Plan UI but reads from
@@ -65,7 +65,7 @@ The local-files contract:
   note that interactive preview requires network access to the hosted Plan UI or a
   running local Plan app.
 - **Headless verify.** Run
-  `npx @agent-native/core@latest plan local verify --dir <plan-dir> --kind <plan|recap>`.
+  `npx @agent-native/core@0.198.8 plan local verify --dir <plan-dir> --kind <plan|recap>`.
   It starts the bridge and checks the private-network preflight and JSON payload
   entirely on loopback. It never sends MDX or assets to a remote validation
   action. When `--app-url` points to a loopback Plan app, verify also validates

@@ -68,7 +68,7 @@ and
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add --skill efficient-fable --update-instructions
+npx @agent-native/skills@0.3.20 add --skill efficient-fable --update-instructions
 ```
 
 Use `--update-instructions` when you want the Fable delegation convention added

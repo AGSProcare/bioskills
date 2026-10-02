@@ -15,7 +15,7 @@ Run this from your app repository to install the skill and hosted Design
 connector:
 
 ```sh
-npx @agent-native/core@latest skills add visual-edit
+npx @agent-native/core@0.198.8 skills add visual-edit
 ```
 
 ## Examples to try

@@ -61,7 +61,7 @@ explicit request to use UI automation for that operation changes this.
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add --skill webmcp
+npx @agent-native/skills@0.3.20 add --skill webmcp
 ```
 
 ## Install in Claude Cowork

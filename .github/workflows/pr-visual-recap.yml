@@ -66,6 +66,10 @@ jobs:
             const association = (pr && pr.author_association || '').toUpperCase();
             const trustedAssociations = ['OWNER', 'MEMBER', 'COLLABORATOR'];
             const isTrustedAuthor = trustedAssociations.includes(association);
+            // The agent reads the untrusted diff with secrets in env; never run it for untrusted authors.
+            if (pr && !isTrustedAuthor) {
+              reasons.push(`PR author association "${association || 'NONE'}" is not trusted (needs OWNER, MEMBER, or COLLABORATOR)`);
+            }
             if (isFork && process.env.HAS_PLAN !== 'true') {
               reasons.push(`fork PR (${headRepo}) without secret access — enable "Send secrets to workflows from pull requests" (and write tokens) in the repo/org Actions settings to run recaps on forks`);
             }
@@ -228,9 +232,8 @@ jobs:
       - name: Resolve recap CLI
         id: cli
         env:
-          # Optional: pin the consumer CLI version (e.g. "1.2.3"). Defaults to
-          # "latest" when unset. Set via repository variable RECAP_CLI_VERSION.
-          RECAP_CLI_VERSION: ${{ vars.RECAP_CLI_VERSION || 'latest' }}
+          # Exact consumer CLI version; override via repository variable RECAP_CLI_VERSION.
+          RECAP_CLI_VERSION: ${{ vars.RECAP_CLI_VERSION || '0.198.8' }}
         run: |
           if [ "$GITHUB_REPOSITORY" = "BuilderIO/agent-native" ] && [ -f packages/core/src/cli/index.ts ]; then
             echo "local=true" >> "$GITHUB_OUTPUT"
@@ -266,12 +269,13 @@ jobs:
       - name: Install published recap CLI
         if: steps.cli.outputs.local != 'true'
         env:
-          RECAP_CLI_VERSION: ${{ vars.RECAP_CLI_VERSION || 'latest' }}
+          RECAP_CLI_VERSION: ${{ vars.RECAP_CLI_VERSION || '0.198.8' }}
         run: |
           set -euo pipefail
           VERSION="$RECAP_CLI_VERSION"
-          if [ "$VERSION" = "latest" ]; then
-            VERSION="$(npm view @agent-native/core@latest version)"
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::RECAP_CLI_VERSION must be an exact version (got '$VERSION')"
+            exit 1
           fi
           for attempt in 1 2 3; do
             if npm install --prefix "$RUNNER_TEMP/recap-cli" --no-audit --no-fund "@agent-native/core@$VERSION"; then
@@ -456,7 +460,7 @@ jobs:
           rm -f recap-source.json recap-url.txt recap-url-reason.txt claude-result.json claude-stderr.log
           run_claude() {
             set +e
-            npx -y @anthropic-ai/claude-code@2 "${CLAUDE_ARGS[@]}" > claude-result.json 2> claude-stderr.log
+            npx -y @anthropic-ai/claude-code@2.1.287 "${CLAUDE_ARGS[@]}" > claude-result.json 2> claude-stderr.log
             CLAUDE_STATUS="$?"
             set -e
             echo "$CLAUDE_STATUS" > claude-exit-code.txt
@@ -481,7 +485,7 @@ jobs:
           set -uo pipefail
           # `codex login` writes ~/.codex/auth.json (the bare env var is dropped on
           # the gpt-5.5 wss transport); stdin keeps the key out of process args.
-          printenv OPENAI_API_KEY | npx -y @openai/codex@0 login --with-api-key || true
+          printenv OPENAI_API_KEY | npx -y @openai/codex@0.159.3 login --with-api-key || true
           # The runner is itself an ephemeral sandbox; bypass Codex's own sandbox
           # (bubblewrap can't init here) and approval gate (cancels the MCP write).
           CODEX_ARGS=(exec --dangerously-bypass-approvals-and-sandbox --skip-git-repo-check)
@@ -496,7 +500,7 @@ jobs:
           rm -f recap-source.json recap-url.txt recap-url-reason.txt codex-events.jsonl codex-stderr.log
           run_codex() {
             set +e
-            npx -y @openai/codex@0 "${CODEX_ARGS[@]}" --json "$(cat recap-prompt.md)" 2> codex-stderr.log | tee codex-events.jsonl
+            npx -y @openai/codex@0.159.3 "${CODEX_ARGS[@]}" --json "$(cat recap-prompt.md)" 2> codex-stderr.log | tee codex-events.jsonl
             CODEX_STATUS="${PIPESTATUS[0]}"
             set -e
             echo "$CODEX_STATUS" > codex-exit-code.txt
@@ -669,9 +673,9 @@ jobs:
           if [ -n "${RECAP_PLAYWRIGHT:-}" ] && [ -x "$RECAP_PLAYWRIGHT" ]; then
             "$RECAP_PLAYWRIGHT" install --with-deps chromium || true
           elif command -v pnpm >/dev/null 2>&1; then
-            pnpm exec playwright install --with-deps chromium 2>/dev/null || npx -y playwright@1 install --with-deps chromium || true
+            pnpm exec playwright install --with-deps chromium 2>/dev/null || npx -y playwright@1.63.0 install --with-deps chromium || true
           else
-            npx -y playwright@1 install --with-deps chromium || true
+            npx -y playwright@1.63.0 install --with-deps chromium || true
           fi
           IMAGE_CACHE_KEY="$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
           LIGHT_SHOT_JSON="$($RECAP_CLI recap shot --url "$PLAN_URL" --token "$PLAN_RECAP_TOKEN" --app-url "$PLAN_RECAP_APP_URL" --out recap.png --theme light --image-cache-key "$IMAGE_CACHE_KEY" || echo '{}')"

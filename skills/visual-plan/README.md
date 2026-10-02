@@ -79,14 +79,14 @@ share link.
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add --skill visual-plan
+npx @agent-native/skills@0.3.20 add --skill visual-plan
 ```
 
 The interactive installer asks whether to use hosted Plans or local files. To
 force the no-sharing local path:
 
 ```sh
-npx @agent-native/skills@latest add --skill visual-plan --mode local-files
+npx @agent-native/skills@0.3.20 add --skill visual-plan --mode local-files
 ```
 
 The skill expects the [Plan MCP connector](https://www.agent-native.com/docs/template-plan)

@@ -39,5 +39,5 @@ audit.
 ## Install
 
 ```sh
-npx @agent-native/skills@latest add --skill agent-watchdog
+npx @agent-native/skills@0.3.20 add --skill agent-watchdog
 ```

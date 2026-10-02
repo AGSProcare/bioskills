@@ -25,7 +25,7 @@
       "Install the quick recap status convention",
       "Use efficient Fable orchestration",
       "When Rewind is invoked without Clips Desktop, explain the prerequisite and ask permission before opening https://clips.agent-native.com/download; never install or enable capture silently",
-      "Treat Rewind as unavailable until Clips is running with Rewind enabled, `npx @agent-native/core@latest skills add rewind --client codex --scope user --yes` configures the local Screen Memory MCP, and `screen_memory_status` succeeds"
+      "Treat Rewind as unavailable until Clips is running with Rewind enabled, `npx @agent-native/core@0.198.8 skills add rewind --client codex --scope user --yes` configures the local Screen Memory MCP, and `screen_memory_status` succeeds"
     ]
   }
 }
